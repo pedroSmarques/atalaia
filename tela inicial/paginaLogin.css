@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ====================================================
+   DESIGN TOKENS
+   ==================================================== */
+:root {
+    --bg-app: #0b0f19;
+    --bg-left: #071022;
+    --bg-right: #111a2c;
+    --bg-card: rgba(255, 255, 255, 0.025);
+    --bg-input: #0b0f19;
+
+    --border-faint: rgba(255, 255, 255, 0.05);
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --border-strong: #1f2937;
+
+    --accent: #38bdf8;
+    --accent-strong: #06b6d4;
+    --accent-hover: #0ea5e9;
+    --accent-glow: rgba(56, 189, 248, 0.18);
+    --success: #10b981;
+
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+    --text-label: #e2e8f0;
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 18px;
+
+    --shadow-card: 0 30px 80px -25px rgba(0, 0, 0, 0.6);
+    --shadow-btn: 0 10px 25px -8px rgba(6, 182, 212, 0.45);
+
+    --ease: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+}
+
+/* Foco visível consistente em toda a página (acessibilidade) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ====================================================
+   LADO ESQUERDO — Apresentação / Branding
+   ==================================================== */
+#lado_esquerdo {
+    flex: 1.1;
+    min-width: 0;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--border-faint);
+    background-color: var(--bg-left);
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Camada da imagem de fundo com controle manual de opacidade */
+#lado_esquerdo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background-image: url('img/fundo_logo.png');
+    background-repeat: no-repeat;
+    background-position: 107% center;
+    background-size: 590px auto;
+
+    opacity: 0.45;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Brilho decorativo sutil, reforça a sensação de "central de monitoramento" */
+#lado_esquerdo::after {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Mantém os conteúdos acima do fundo */
+#lado_esquerdo>* {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background-color: var(--accent);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #080c14;
+}
+
+.logo-text {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+#cor_azul {
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-left: 4px;
+}
+
+#conteudo_esquerdo {
+    max-width: 520px;
+    margin: auto 0;
+    padding: 48px 0;
+}
+
+.subtitulo-azul {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+#conteudo_esquerdo h1 {
+    font-size: clamp(2rem, 1.1rem + 2.8vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.texto-introducao {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    max-width: 44ch;
+}
+
+#dadosGerais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-soft);
+}
+
+#dadosGerais>div {
+    display: flex;
+    flex-direction: column;
+}
+
+#dadosGerais dd {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#dadosGerais b {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+#dadosGerais .verde {
+    color: var(--success);
+}
+
+#rodape_lado_esquerdo {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    letter-spacing: 1.5px;
+}
+
+
+/* ====================================================
+   LADO DIREITO — Acesso / Formulário
+   ==================================================== */
+#lado_direito {
+    flex: 0.9;
+    min-width: 0;
+    background-color: var(--bg-right);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+#conteudo_direito {
+    width: 100%;
+    max-width: 380px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-faint);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 40px 36px;
+}
+
+#conteudo_direito h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#conteudo_direito .texto-introducao {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    max-width: none;
+}
+
+/* Selector de Roles / Cargos */
+#botoes_cargos {
+    display: flex;
+    background-color: #1f2937;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+}
+
+/* Estilo base dos botões */
+#botoes_cargos button {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 10px 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--ease), color var(--ease);
+}
+
+/* Estado quando o botão estiver SELECIONADO */
+#botoes_cargos button.ativo {
+    background-color: var(--accent);
+    color: #080c14;
+    font-weight: 600;
+    box-shadow: 0 4px 14px -4px rgba(56, 189, 248, 0.5);
+}
+
+/* Efeito ao passar o rato nos botões não selecionados */
+#botoes_cargos button:not(.ativo):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo label {
+    font-size: 0.8rem;
+    color: var(--text-label);
+    font-weight: 500;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px 14px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color var(--ease), box-shadow var(--ease);
+}
+
+.campo input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.campo input:hover {
+    border-color: #334155;
+}
+
+.campo input:focus {
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Botões de Ação */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-strong);
+    color: #0f172a;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    transition: background-color var(--ease), transform var(--ease), box-shadow var(--ease);
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-btn);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-secundario {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: color var(--ease), background-color var(--ease);
+}
+
+.btn-secundario:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.texto-protegido {
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+/* ====================================================
+   RESPONSIVIDADE
+   ==================================================== */
+
+/* Telas grandes: evita que o painel de login fique espremido em monitores ultrawide */
+@media (min-width: 1600px) {
+    #lado_esquerdo {
+        padding: 40px 100px;
+    }
+}
+
+/* Tablets e notebooks menores */
+@media (max-width: 1100px) {
+    #lado_esquerdo {
+        padding: 40px;
+    }
+
+    #lado_esquerdo::before {
+        background-size: 440px auto;
+    }
+}
+
+/* Empilha os dois painéis a partir daqui */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+
+    #lado_esquerdo {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        padding: 32px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-faint);
+    }
+
+    #lado_esquerdo::before {
+        background-position: center -40px;
+        background-size: 320px auto;
+        opacity: 0.25;
+    }
+
+    #conteudo_esquerdo {
+        max-width: none;
+        margin: 0;
+        padding: 32px 0;
+    }
+
+    #lado_direito {
+        flex: none;
+        width: 100%;
+        padding: 32px 24px 48px;
+    }
+
+    #conteudo_direito {
+        max-width: 440px;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 480px) {
+    #lado_esquerdo {
+        padding: 24px 20px;
+    }
+
+    #lado_esquerdo::before {
+        display: none;
+    }
+
+    #lado_esquerdo::after {
+        width: 220px;
+        height: 220px;
+        top: -80px;
+        left: -80px;
+    }
+
+    #conteudo_esquerdo {
+        padding: 24px 0;
+    }
+
+    .texto-introducao {
+        max-width: none;
+    }
+
+    #dadosGerais {
+        gap: 20px 28px;
+    }
+
+    #dadosGerais b {
+        font-size: 1.5rem;
+    }
+
+    #lado_direito {
+        padding: 20px 16px 36px;
+    }
+
+    #conteudo_direito {
+        padding: 28px 22px;
+        border-radius: var(--radius-md);
+    }
+
+    #botoes_cargos {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    #botoes_cargos button {
+        flex: 1 1 calc(50% - 4px);
+    }
+}
